@@ -32,6 +32,7 @@ async function userCreate(first_name, last_name, username, password, member, adm
         last_name: last_name,
         username: username,
         password: password,
+        confirm_password,
         member: member,
         admin: admin,
     };
