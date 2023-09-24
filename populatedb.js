@@ -1,17 +1,29 @@
+// Get arguments passed on command line
+const userArgs = process.argv.slice(2);
+
 //require models
 const User = require("./models/user");
 const Message = require("./models/message");
 
-// Get arguments passed on command line
-const userArgs = process.argv.slice(2);
+const users = [];
+const messages = [];
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
 const mongoDB = userArgs[0];
 
-const users = [];
-const messages = [];
+main().catch((err) => console.log(err));
+
+async function main() {
+    console.log("Debug: About to connect");
+    await mongoose.connect(mongoDB);
+    console.log("Debug: Should be connected?");
+    await getUsers();
+    await getMessages();
+    console.log("Debug: Closing mongoose");
+    mongoose.connection.close();
+  }
 
 //create functions to create the user and message objects
 async function userCreate(first_name, last_name, username, password, member, admin) {
@@ -27,7 +39,6 @@ async function userCreate(first_name, last_name, username, password, member, adm
     const user = new User(userDetail);
 
     await user.save();
-    users[index] = user;
     console.log(`Added User: ${user}`);
 }
 
@@ -41,15 +52,14 @@ async function messageCreate(title, timestamp, message_text) {
     const message = new Message(messageDetail);
 
     await message.save();
-    messages[index] = message;
     console.log(`Added Message: ${message}`)
 }
 
 //add some sample users and messages to the database
-async function getUser() {
+async function getUsers() {
     console.log("Adding Users")
     await Promise.all([
-        userCreate(0,
+        userCreate(
             "Sam",
             "Jones",
             "sam_jones34",
@@ -57,7 +67,7 @@ async function getUser() {
             false,
             false,
         ),
-        userCreate(1,
+        userCreate(
             "Ruth",
             "Smith",
             "ruthisgreat233",
@@ -65,7 +75,7 @@ async function getUser() {
             true,
             false,
         ),
-        userCreate(2,
+        userCreate(
             "Jarod",
             "Light",
             "lights784sky",
@@ -73,7 +83,7 @@ async function getUser() {
             true,
             true,
         ),
-        userCreate(3,
+        userCreate(
             "Test",
             "Account",
             "test2023",
@@ -87,17 +97,17 @@ async function getUser() {
 async function getMessages() {
     console.log("Adding Messages")
     await Promise.all([
-        messageCreate(0,
+        messageCreate(
             "Hello There",
             Date.now(),
             "How is everyone doing today? I am doing well."
         ),
-        messageCreate(1,
+        messageCreate(
             "Hi All",
             Date.now(),
             "What is the weather like today in your town? Mine is clowdy!"
         ),
-        messageCreate(2,
+        messageCreate(
             "Anyone Out There",
             Date.now(),
             "I just dropped in to say hello!"
