@@ -1,0 +1,32 @@
+extends layout 
+
+block content 
+
+    h1=title 
+
+    form(method='POST' action='')
+        div.form-group 
+            label(for='first_name') First Name: 
+            input#first_name.form-control(type='text', placeholder='Enter First Name' name='first_name' required='true' value=(undefined===user ? '' : user.first_name))
+
+        div.form-group 
+            label(for='last_name') Last Name: 
+            input#last_name.form-control(type='text', placeholder='Enter Last Name' name='last_name' required='true' value=(undefined===user ? '' : user.last_name))
+
+        div.form-group 
+            label(for='username') Username: 
+            input#username.form-control(type='text', placeholder='Enter Username' name='username' required='true' value=(undefined===user ? '' : user.username))
+
+        div.form-group 
+            label(for='password') Password: 
+            input#password.form-control(type='text', placeholder='Enter Password' name='password' required='true' value=(undefined===user ? '' : user.password))
+
+        div.form-group 
+            label(for='confirm_password') Confirm Password: 
+            input#confirm_password.form-control(type='text', placeholder='Confirm Password' name='confirm_password' required='true' value=(undefined===user ? '' : user.confirm_password))
+
+    button.btn.btn-primary(type='submit') Sign Up
+
+        
+        
+        

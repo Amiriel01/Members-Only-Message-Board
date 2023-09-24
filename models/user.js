@@ -22,7 +22,11 @@ const UserSchema = new Schema({
     password: {
         type: String, 
         required: true,
-        unique: true,
+        maxLength: 25,
+    },
+    confirm_password: {
+        type: String, 
+        required: true,
         maxLength: 25,
     },
     member: {

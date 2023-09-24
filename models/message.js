@@ -23,6 +23,10 @@ const MessageSchema = new Schema({
     }
 });
 
+MessageSchema.virtual("url").get(function() {
+    return `/routers/message/${this._id}`;
+})
+
 module.exports = mongoose.model("Message", MessageSchema);
 
 // { timestamps: true },
