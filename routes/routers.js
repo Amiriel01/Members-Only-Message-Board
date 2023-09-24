@@ -12,9 +12,9 @@ router.get("/message", message_controller.message_list)
 //sign up form routes
 
 //GET sign up form
-router.get("/sign-up", user_controller.sign_up_form_get);
+router.get("/message/sign-up", user_controller.sign_up_form_get);
 
 //POST sign up form
-router.post('/sign-up', user_controller.sign_up_form_post);
+router.post('/message/sign-up', user_controller.sign_up_form_post);
 
 module.exports = router;
