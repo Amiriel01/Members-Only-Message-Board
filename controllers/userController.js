@@ -1,14 +1,20 @@
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
-const { body, validationResult } = require("express-validator");
+const { body, validationResult, check } = require("express-validator");
 const Message =require("../models/message");
+const passport = require("passport");
+
 
 //display sign up form on GET//
 exports.sign_up_form_get = asyncHandler(async (req, res, next) => {
+    const allUserInformation = await User.find({}).exec()
     res.render("sign_up_form", {
-        title: "Sign Up Here"
+        title: "Sign Up Here",
+        allUserInformation: allUserInformation,
     })
 });
+
+confirmPassword = check('confirm_password')
 
 //handle sign up form on POST//
 exports.sign_up_form_post = [
@@ -37,7 +43,17 @@ exports.sign_up_form_post = [
         .trim()
         .isLength({ min: 5 })
         .isLength({ max: 25 })
+        .custom(async (confirmPassword, {req}) => {
+            console.log(confirmPassword)
+            const password = req.body.password
+            console.log(password)
+            if(password !== confirmPassword) {
+                throw new Error('Passwords must match.')
+            }
+            return true;
+        })
         .escape(),
+
 
     asyncHandler(async (req, res, next) => {
         //extract validation errors from the request//
@@ -47,9 +63,8 @@ exports.sign_up_form_post = [
         const user = new User({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
-            username: req.body.first_username,
+            username: req.body.username,
             password: req.body.password,
-            confirm_password: req.body.confirm_password,
         });
 
         //When there are no errors, render form again with sanitized values and error messages//
@@ -61,11 +76,14 @@ exports.sign_up_form_post = [
                 user: user,
                 errors: errors.array(),
             });
+            return;
         } else {
-            //daata from form is valid. Save item.
+            //data from form is valid. Save item.
             await user.save();
-            res.redirect(index.url);
+            res.redirect("/routers/message");
         }
     }),
 ]
+
+
 

@@ -24,11 +24,6 @@ const UserSchema = new Schema({
         required: true,
         maxLength: 25,
     },
-    confirm_password: {
-        type: String, 
-        required: true,
-        maxLength: 25,
-    },
     member: {
         type: Boolean,
         default: false,

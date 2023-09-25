@@ -19,13 +19,13 @@ block content
 
         div.form-group 
             label(for='password') Password: 
-            input#password.form-control(type='text', placeholder='Enter Password' name='password' required='true' value=(undefined===user ? '' : user.password))
+            input#password.form-control(type='password', placeholder='Enter Password' name='password' required='true' value=(undefined===user ? '' : user.password))
 
         div.form-group 
             label(for='confirm_password') Confirm Password: 
-            input#confirm_password.form-control(type='text', placeholder='Confirm Password' name='confirm_password' required='true' value=(undefined===user ? '' : user.confirm_password))
+            input#confirm_password.form-control(type='password', placeholder='Confirm Password' name='confirm_password' required='true' value=(undefined===user ? '' : user.confirm_password))
 
-    button.btn.btn-primary(type='submit') Sign Up
+        input.btn.btn-primary(type='submit' value="Sign Up") 
 
         
         

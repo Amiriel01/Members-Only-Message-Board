@@ -40,7 +40,7 @@ async function userCreate(first_name, last_name, username, password, member, adm
     const user = new User(userDetail);
 
     await user.save();
-    // users[index]= user
+    users[index]= user
     console.log(`Added User: ${user}`);
 }
 
@@ -54,6 +54,7 @@ async function messageCreate(title, timestamp, message_text) {
     const message = new Message(messageDetail);
 
     await message.save();
+    messages[index]= message
     console.log(`Added Message: ${message}`)
 }
 
