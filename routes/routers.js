@@ -6,8 +6,13 @@ const asyncHandler = require("express-async-handler");
 const user_controller = require("../controllers/userController");
 const message_controller = require("../controllers/messageController");
 
+// //message home route
+// router.get("/message", message_controller.message_list)
+
 //message home route
-router.get("/message", message_controller.message_list)
+router.get("/message", (req, res) => {
+    res.render("message_list", { user: req.user});
+})
 
 //sign up form routes
 
