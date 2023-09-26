@@ -19,4 +19,27 @@ router.post(
   })
 );
 
+router.get("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/")
+  });
+});
+
+// router.post("/logout", (req, res, next) => {
+//   req.logout((err) => {
+//     if (err) {
+//       return next(err);
+//     }
+//     req.session = null;
+//     res.redirect("/")
+//   });
+// });
+
+// router.post("/logout", (req, res, next) => {
+//     res.render('/')
+//   })
+
 module.exports = router;

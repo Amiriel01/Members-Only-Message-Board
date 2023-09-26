@@ -5,10 +5,16 @@ const { body, validationResult } = require("express-validator");
 
 //display a list of messages
 exports.message_list = asyncHandler(async (req, res, next) => {
-    const userMessages = await Message.find().populate().exec()
+    // const userMessages = await Message.find().populate().exec()
+
+    const [user, userMessages] = await Promise.all([
+        Message.find().populate("username").exec(),
+        User.find().exec()
+    ])
 
     res.render("message_list", { 
         title: "Welcome to the Message Board!",
-        all_messages: userMessages
+        all_messages: userMessages,
+        user:user
     });
 });
