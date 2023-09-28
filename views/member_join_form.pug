@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+
+    h1 Enter the code word to become a member.
+
+        form(method='POST' action='')
+            div.form-group 
+                label(for='memberWord') Code Word: 
+                input#memberWord.form-control(type='text', placeholder='Enter Code Word' name='memberWord' required='true') 
+            
+            input.btn.btn-primary(type='submit' value="Submit")
+
+    a(href='/')
+            button(type='button') Return to Message Board

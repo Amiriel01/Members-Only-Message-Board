@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+
+    extends layout 
+
+block content 
+
+    h1 Enter the code word to become an admin.
+
+        form(method='POST' action='')
+            div.form-group 
+                label(for='adminWord') Code Word: 
+                input#adminWord.form-control(type='text', placeholder='Enter Code Word' name='adminWord' required='true') 
+            
+            input.btn.btn-primary(type='submit' value="Submit")

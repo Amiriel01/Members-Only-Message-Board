@@ -80,10 +80,48 @@ exports.sign_up_form_post = [
         } else {
             //data from form is valid. Save item.
             await user.save();
-            res.redirect("/routers/message");
+            res.redirect("/routers/user_join_form");
         }
     }),
 ]
+
+//handle member form get
+exports.member_join_form_get = asyncHandler(async(req, res, next) => {
+    res.render("member_join_form")
+})
+
+//handle member form post
+exports.member_join_form_post = asyncHandler(async(req, res, next) => {
+    res.render("member_join_form")
+})
+
+exports.create_member_status = asyncHandler(async (res, req, next) => {
+
+    const memberWord = "Tree";
+    const user = await User.find().exec()
+    let memberStatus = user.member
+
+    if (memberWord === "Tree") {
+        let memberStatus = true;
+        res.redirect("/users/admin_join_form")
+    } else {
+        alert("Code Invalid. Please try again or return to message board.")
+    }
+})
+
+exports.create_admin_status = asyncHandler(async (res, req, next) => {
+
+    const adminWord = "Leaf";
+    const user = await User.find().exec()
+    let adminStatus = user.admin
+
+    if (memberWord === "Leaf") {
+        let adminStatus = true;
+        res.redirect("/")
+    } else {
+        alert("Code Invalid. Please try again or return to message board.")
+    }
+})
 
 
 
