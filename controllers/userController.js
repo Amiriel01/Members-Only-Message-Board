@@ -82,7 +82,7 @@ exports.sign_up_form_post = [
         } else {
             //data from form is valid. Save item.
             await user.save();
-            res.redirect("/users/member_join_form");
+            res.redirect("/");
         }
     }),
 ]
