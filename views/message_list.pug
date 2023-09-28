@@ -35,17 +35,20 @@ block content
                     button(type='button') Logout
 
         else 
+            div(class='no-user')
+                h1(id="header-title") Welcome to the Message Board!
+                div(class="no-user-buttons-container")
+                    a(href='/routers/message/sign-up') 
+                        button(type='button' class="no-user-button" id="no-user-button-left") Sign-Up
 
-            h1 Welcome to the Message Board!
-            a(href='/routers/message/sign-up') 
-                button(type='button') Sign-Up
-
-            a(href='/users/login')
-                button(type='button') Login 
-        each message in all_messages
-            div.message-card 
-                if member || admin
-                    p #{message.user.username}
-                p #{message.title}
-                p #{message.timestamp}
-                p #{message.message_text}
+                    a(href='/users/login')
+                        button(type='button' class="no-user-button" id="no-user-button-right") Login 
+            each message in all_messages
+                div.message-card 
+                    div.card-header
+                        p #{message.title}
+                        if member || admin
+                            p #{message.user.username}
+                    div(class="card-body")
+                        p #{message.timestamp_formatted}
+                        p.message-text #{message.message_text}

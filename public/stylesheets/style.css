@@ -1,5 +1,7 @@
 body {
-  padding: 50px;
+  margin: 0;
+  padding: 0;
+  /* padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -14,4 +16,56 @@ a {
 
 .btn {
   background-color: aqua;
+}
+
+.no-user {
+  background-color: #00B7FF;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  justify-content: space-around;
+  font-weight: bold;
+}
+
+#header-title {
+  font-size: 3rem;
+}
+
+.no-user-button {
+  padding: .5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: white;
+}
+
+.no-user-button:hover {
+  background-color: black;
+  color: white;
+}
+
+#no-user-button-left {
+  margin-right: .5rem;
+}
+
+.message-card {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  border: 1px solid black;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
+
+.message-text {
+  font-size: 1.25rem;
 }

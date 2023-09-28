@@ -91,7 +91,7 @@ exports.sign_up_form_post = [
 //handle member form get
 exports.member_join_form_get = asyncHandler(async (req, res, next) => {
     res.render("member_join_form", {
-        user: res.locals.currentUser,
+        user: res.user,
     })
 })
 
@@ -100,6 +100,8 @@ exports.member_join_form_post = [
 
     body("member_code")
         .trim()
+        .isLength({ min: 1 })
+        .isLength({ max: 10 })
         .escape(),
 
     asyncHandler(async (res, req, next) => {
@@ -108,20 +110,20 @@ exports.member_join_form_post = [
         if (!errors.isEmpty()) {
 
             res.render("member_join_form", {
-                user: res.locals.currentUser,
+                user: res.user,
                 errors: errors.array(),
             });
             return;
-        } else if (req.body.member_code != process.env.MEMBER_CODE) {
+        } else if (req.body.member_code != "Tree") {
             res.render("member_join_form", {
-                user: res.locals.currentUser,
+                user: res.user,
                 memberCodeError: "Wrong Member Code"
             })
         } else {
-            const user = new User(res.local.currentUser);
+            const user = new User(res.user);
             user.member = true;
 
-            await User.findByIdAndUpdate(res.locals.currentUser._id, user, {}, (err) => {
+            await User.findByIdAndUpdate(res.user._id, user, {}, (err) => {
                 if (err) return next(err);
                 return res.redirect("/")
             });
@@ -132,7 +134,7 @@ exports.member_join_form_post = [
 //handle admin form get
 exports.admin_join_form_get = asyncHandler(async (req, res, next) => {
     res.render("admin_join_form", {
-        user: res.locals.currentUser,
+        user: res.user,
     })
 })
 
@@ -149,20 +151,20 @@ exports.admin_join_form_post = [
         if (!errors.isEmpty()) {
 
             res.render("admin_join_form", {
-                user: res.locals.currentUser,
+                user: res.user,
                 errors: errors.array(),
             });
             return;
         } else if (req.body.admin_code != process.env.ADMIN_CODE) {
             res.render("admin_join_form", {
-                user: res.locals.currentUser,
+                user: res.user,
                 memberCodeError: "Wrong Admin Code"
             })
         } else {
             const user = new User(res.local.currentUser);
             user.admin = true;
 
-            await User.findByIdAndUpdate(res.locals.currentUser._id, user, {}, (err) => {
+            await User.findByIdAndUpdate(res.user._id, user, {}, (err) => {
                 if (err) return next(err);
                 return res.redirect("/")
             });
