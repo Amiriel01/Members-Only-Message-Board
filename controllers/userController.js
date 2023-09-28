@@ -109,6 +109,16 @@ exports.create_member_status = asyncHandler(async (res, req, next) => {
     }
 })
 
+//handle admin form get
+exports.admin_join_form_get = asyncHandler(async(req, res, next) => {
+    res.render("admin_join_form")
+})
+
+//handle admin form post
+exports.admin_join_form_post = asyncHandler(async(req, res, next) => {
+    res.render("admin_join_form")
+})
+
 exports.create_admin_status = asyncHandler(async (res, req, next) => {
 
     const adminWord = "Leaf";
