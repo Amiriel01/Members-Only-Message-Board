@@ -2,14 +2,14 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const Message = require("../models/message");
 const { body, validationResult } = require("express-validator");
+const user = require("../models/user");
 
 //display a list of messages
 exports.message_list = asyncHandler(async (req, res, next) => {
     // const userMessages = await Message.find().populate().exec()
-
-    const [user, userMessages] = await Promise.all([
-        Message.find().populate("username").exec(),
-        User.find().exec()
+    let user = req.user
+    const [userMessages] = await Promise.all([
+        Message.find().populate("user").exec(),
     ])
 
     res.render("message_list", {
@@ -39,12 +39,12 @@ exports.create_message_post = [
     asyncHandler(async (req, res, next) => {
         //extract validation errors from the request//
         const errors = validationResult(req);
-
+console.log(req.user)
         //create sign up form object with escaped and trimmed info//
         const message = new Message({
             title: req.body.title,
-            timestamp: req.body.timestamp,
             message_text: req.body.message_text,
+            user: req.user
         });
 
 

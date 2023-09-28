@@ -11,10 +11,13 @@ const message_controller = require("../controllers/messageController");
 // //message home route
 // router.get("/message", message_controller.message_list)
 
-//message home route
-router.get("/message", (req, res) => {
-    res.render("message_list", { user: req.user });
-})
+// //message home route
+// router.get("/message", (req, res) => {
+//     message_controller.message_list
+//     // res.render("message_list", { user: req.user });
+// })
+
+router.get("/message", message_controller.message_list);
 
 //sign up form routes
 

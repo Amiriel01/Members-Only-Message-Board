@@ -20,7 +20,7 @@ router.post(
   "/login",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/"
+    failureRedirect: "/users/login"
   })
 );
 
@@ -33,9 +33,9 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-router.get("/member_join",  user_controller.member_join_form_get);
+router.get("/member_join_form",  user_controller.member_join_form_get);
 
-router.post("/member_join",  user_controller.member_join_form_post);
+router.post("/member_join_form",  user_controller.member_join_form_post);
 
 router.get("/admin_join_form",  user_controller.admin_join_form_get);
 

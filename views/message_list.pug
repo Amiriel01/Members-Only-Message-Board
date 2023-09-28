@@ -2,29 +2,26 @@ extends layout
 
 block content 
 
-    if user = true
 
         h1 Welcome to the Message Board!
 
-        a(href='/routers/message/create_message')
-            button(type='button') Create Message
+        if user
+            a(href='/routers/message/create_message')
+                button(type='button') Create Message
 
-        a(href='/users/logout')
-            button(type='button') Logout
+            a(href='/users/logout')
+                button(type='button') Logout
 
-        p #{title}
-        p #{message_text}
+        else 
+            a(href='/routers/message/sign-up') 
+                button(type='button') Sign-Up
 
-    else 
-
-        h1 Welcome to the Message Board
-
-        h2 Login or Sign Up
-
-        a(href='/routers/message/sign-up') 
-            button(type='button') Sign-Up
-
-        a(href='/users/login')
-            button(type='button') Login 
-
-    
+            a(href='/users/login')
+                button(type='button') Login 
+        each message in all_messages
+            div.message-card 
+                if user
+                    p #{message.user.username}
+                p #{message.title}
+                p #{message.timestamp}
+                p #{message.message_text}

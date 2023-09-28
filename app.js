@@ -8,6 +8,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const User = require("./models/user");
+const bcrypt = require('bcryptjs');
 
 
 const indexRouter = require('./routes/index');
@@ -75,7 +76,7 @@ passport.use(
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       };
-      if (user.password !== password) {
+      if (!(await bcrypt.compare(password, user.password))) {
         return done(null, false, { message: "Incorrect password" });
       };
       return done(null, user);

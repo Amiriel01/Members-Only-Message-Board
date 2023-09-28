@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({
-    users: {
+    user: {
         type: Schema.Types.ObjectId, ref: "User", required: true
     },
     title: {
@@ -13,7 +13,7 @@ const MessageSchema = new Schema({
         maxLength: 25,
     },
     timestamp: { 
-        type: Date, default: Date.now, required: true 
+        type: Date, default: Date.now 
     },
     message_text: {
         type: String,

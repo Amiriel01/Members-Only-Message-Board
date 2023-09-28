@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult, check } = require("express-validator");
 const Message =require("../models/message");
 const passport = require("passport");
+const bcrypt = require("bcryptjs");
 
 
 //display sign up form on GET//
@@ -58,13 +59,14 @@ exports.sign_up_form_post = [
     asyncHandler(async (req, res, next) => {
         //extract validation errors from the request//
         const errors = validationResult(req);
+        const hashPassword = await bcrypt.hashSync(req.body.password, 10)
 
         //create sign up form object with escaped and trimmed info//
         const user = new User({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             username: req.body.username,
-            password: req.body.password,
+            password: hashPassword,
         });
 
         //When there are no errors, render form again with sanitized values and error messages//
@@ -80,7 +82,7 @@ exports.sign_up_form_post = [
         } else {
             //data from form is valid. Save item.
             await user.save();
-            res.redirect("/routers/user_join_form");
+            res.redirect("/users/member_join_form");
         }
     }),
 ]
