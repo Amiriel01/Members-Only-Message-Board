@@ -9,10 +9,11 @@ block content
         a(href='/routers/message/create_message')
             button(type='button') Create Message
 
-        a(href='/routers/users/logout')
+        a(href='/users/logout')
             button(type='button') Logout
 
-        p See message board 
+        p #{title}
+        p #{message_text}
 
     else 
 

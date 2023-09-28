@@ -2,4 +2,16 @@ extends layout
 
 block content 
 
-    h1 Create a message
+    h1 Create New Message
+
+    form(method='POST' action='')
+        div.form-group 
+            label(for='title') Message Title: 
+            input#title.form-control(type='text', placeholder='Enter Message Title' name='title' required='true')
+
+        div.form-group 
+            label(for='message_text') Message Text: 
+            input#message_text.form-control(type='text', placeholder='Enter Message Text' name='message_text' required='true')
+
+        a(href='/') 
+            input.btn.btn-primary(type='submit' value="Submit Message") 
