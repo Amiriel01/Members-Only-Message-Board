@@ -24,4 +24,10 @@ router.get("/message/sign-up", user_controller.sign_up_form_get);
 //POST sign up form
 router.post('/message/sign-up', user_controller.sign_up_form_post);
 
+//GET nessage create form
+router.get("/message/create_message", message_controller.create_message_get);
+
+//POST message create form
+router.post('/message/create_message', message_controller.create_message_post);
+
 module.exports = router;

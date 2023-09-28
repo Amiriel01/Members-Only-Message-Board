@@ -18,3 +18,11 @@ exports.message_list = asyncHandler(async (req, res, next) => {
         user:user
     });
 });
+
+exports.create_message_get = asyncHandler(async(req, res, next) => {
+    res.render("create_message")
+})
+
+exports.create_message_post = asyncHandler(async(req, res, next) => {
+    res.render("create_message")
+})
