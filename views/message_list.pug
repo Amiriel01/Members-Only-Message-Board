@@ -2,16 +2,37 @@ extends layout
 
 block content 
 
-
         if user
+            if admin 
 
-            h1 Welcome to the Message Board #{user.username}!
+                h1 Welcome to the Message Board #{user.username}!
 
-            a(href='/routers/message/create_message')
-                button(type='button') Create Message
+                a(href='/routers/message/create_message')
+                    button(type='button') Create Message
 
-            a(href='/users/logout')
-                button(type='button') Logout
+                a(href='/users/logout')
+                    button(type='button') Logout
+
+            else if member
+
+                h1 Welcome to the Message Board #{user.username}!
+
+                a(href='/routers/message/create_message')
+                    button(type='button') Create Message
+
+                a(href='/users/admin_join_form')
+                    button(type='button') Enter Admin Code for Admin Privleges
+
+                a(href='/users/logout')
+                    button(type='button') Logout
+                    
+            else 
+
+                h1 Welcome to the Message Board #{user.username}!
+                a(href='/users/member_join_form')
+                    button(type='button') Enter Code to Post Messages
+                a(href='/users/logout')
+                    button(type='button') Logout
 
         else 
 
@@ -23,7 +44,7 @@ block content
                 button(type='button') Login 
         each message in all_messages
             div.message-card 
-                if user
+                if member || admin
                     p #{message.user.username}
                 p #{message.title}
                 p #{message.timestamp}

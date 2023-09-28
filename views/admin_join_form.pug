@@ -2,18 +2,25 @@ extends layout
 
 block content 
 
-    extends layout 
+    h1 Welcome #{user.username}!
 
-block content 
-
-    h1 Enter the code word to become an admin.
+    h2 Enter the code word to become a member and post messages.
 
         form(method='POST' action='')
             div.form-group 
-                label(for='adminWord') Code Word: 
-                input#adminWord.form-control(type='text', placeholder='Enter Code Word' name='adminWord' required='true') 
+                label(for='admin_code') Code Word: 
+                input#admin_code.form-control(type='text', placeholder='Enter Code Word' name='admin_code' required='true') 
+
+                if (adminCodeError)
+                    p #{adminCodeError}
+
+                a(href='/')
+                    input.btn.btn-primary(type='submit' value="Submit")
+
+            if (errors)
+                p #{errors}
             
-            input.btn.btn-primary(type='submit' value="Submit")
+           
 
     a(href='/')
             button(type='button') Return to Message Board

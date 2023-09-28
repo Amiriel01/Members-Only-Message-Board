@@ -1,9 +1,10 @@
 const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult, check } = require("express-validator");
-const Message =require("../models/message");
+const Message = require("../models/message");
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
+require('dotenv').config();
 
 
 //display sign up form on GET//
@@ -44,11 +45,11 @@ exports.sign_up_form_post = [
         .trim()
         .isLength({ min: 5 })
         .isLength({ max: 25 })
-        .custom(async (confirmPassword, {req}) => {
+        .custom(async (confirmPassword, { req }) => {
             console.log(confirmPassword)
             const password = req.body.password
             console.log(password)
-            if(password !== confirmPassword) {
+            if (password !== confirmPassword) {
                 throw new Error('Passwords must match.')
             }
             return true;
@@ -72,7 +73,7 @@ exports.sign_up_form_post = [
         //When there are no errors, render form again with sanitized values and error messages//
         if (!errors.isEmpty()) {
             //get all user info from the form//
-           
+
             res.render("sign_up_form", {
                 title: "New User Sign Up",
                 user: user,
@@ -88,52 +89,83 @@ exports.sign_up_form_post = [
 ]
 
 //handle member form get
-exports.member_join_form_get = asyncHandler(async(req, res, next) => {
-    res.render("member_join_form")
+exports.member_join_form_get = asyncHandler(async (req, res, next) => {
+    res.render("member_join_form", {
+        user: res.locals.currentUser,
+    })
 })
 
 //handle member form post
-exports.member_join_form_post = asyncHandler(async(req, res, next) => {
-    res.render("member_join_form")
-})
+exports.member_join_form_post = [
 
-exports.create_member_status = asyncHandler(async (res, req, next) => {
+    body("member_code")
+        .trim()
+        .escape(),
 
-    const memberWord = "Tree";
-    const user = await User.find().exec()
-    let memberStatus = user.member
+    asyncHandler(async (res, req, next) => {
+        const errors = validationResult(req);
 
-    if (memberWord === "Tree") {
-        let memberStatus = true;
-        res.redirect("/users/admin_join_form")
-    } else {
-        alert("Code Invalid. Please try again or return to message board.")
-    }
-})
+        if (!errors.isEmpty()) {
+
+            res.render("member_join_form", {
+                user: res.locals.currentUser,
+                errors: errors.array(),
+            });
+            return;
+        } else if (req.body.member_code != process.env.MEMBER_CODE) {
+            res.render("member_join_form", {
+                user: res.locals.currentUser,
+                memberCodeError: "Wrong Member Code"
+            })
+        } else {
+            const user = new User(res.local.currentUser);
+            user.member = true;
+
+            await User.findByIdAndUpdate(res.locals.currentUser._id, user, {}, (err) => {
+                if (err) return next(err);
+                return res.redirect("/")
+            });
+        }
+    })
+]
 
 //handle admin form get
-exports.admin_join_form_get = asyncHandler(async(req, res, next) => {
-    res.render("admin_join_form")
+exports.admin_join_form_get = asyncHandler(async (req, res, next) => {
+    res.render("admin_join_form", {
+        user: res.locals.currentUser,
+    })
 })
 
-//handle admin form post
-exports.admin_join_form_post = asyncHandler(async(req, res, next) => {
-    res.render("admin_join_form")
-})
+//handle member form post
+exports.admin_join_form_post = [
 
-exports.create_admin_status = asyncHandler(async (res, req, next) => {
+    body("admin_code")
+        .trim()
+        .escape(),
 
-    const adminWord = "Leaf";
-    const user = await User.find().exec()
-    let adminStatus = user.admin
+    asyncHandler(async (res, req, next) => {
+        const errors = validationResult(req);
 
-    if (memberWord === "Leaf") {
-        let adminStatus = true;
-        res.redirect("/")
-    } else {
-        alert("Code Invalid. Please try again or return to message board.")
-    }
-})
+        if (!errors.isEmpty()) {
 
+            res.render("admin_join_form", {
+                user: res.locals.currentUser,
+                errors: errors.array(),
+            });
+            return;
+        } else if (req.body.admin_code != process.env.ADMIN_CODE) {
+            res.render("admin_join_form", {
+                user: res.locals.currentUser,
+                memberCodeError: "Wrong Admin Code"
+            })
+        } else {
+            const user = new User(res.local.currentUser);
+            user.admin = true;
 
-
+            await User.findByIdAndUpdate(res.locals.currentUser._id, user, {}, (err) => {
+                if (err) return next(err);
+                return res.redirect("/")
+            });
+        }
+    })
+]
