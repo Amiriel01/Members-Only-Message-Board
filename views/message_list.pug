@@ -4,51 +4,62 @@ block content
 
         if user
             if admin 
+                div.admin-header
+                    div.header-title-username
+                        h1(id="header-title") Welcome to the Message Board 
+                        h2(id="username-header") #{user.username}
+                    div.header-right-side
+                        div(class="user-buttons-container")
+                            a(href='/routers/message/   create_message')
+                                button(type='button' class="user-button" id="user-button-left") Create Message
 
-                h1 Welcome to the Message Board #{user.username}!
-
-                a(href='/routers/message/create_message')
-                    button(type='button') Create Message
-
-                a(href='/users/logout')
-                    button(type='button') Logout
+                            a(href='/users/logout')
+                                button(type='button' class="user-button" id="user-button-right") Logout
 
             else if member
+                div.member-header
+                    div.header-title-username
+                        h1(id="header-title") Welcome to the Message Board 
+                        h2(id="username-header") #{user.username}
+                    div.header-right-side
+                        div(class="user-buttons-container")
+                            a(href='/routers/message/create_message')
+                                button(type='button' class="user-button" id="user-button-left") Create Message
 
-                h1 Welcome to the Message Board #{user.username}!
+                            a(href='/users/admin_join_form')
+                                button(type='button' class="user-button" id="user-button-left") Enter Admin Code for Admin Privleges
 
-                a(href='/routers/message/create_message')
-                    button(type='button') Create Message
-
-                a(href='/users/admin_join_form')
-                    button(type='button') Enter Admin Code for Admin Privleges
-
-                a(href='/users/logout')
-                    button(type='button') Logout
-                    
+                            a(href='/users/logout')
+                                button(type='button' class="user-button" id="user-button-right") Logout
+                        p.code-instructions Enter Admin Code to Delete Messages
             else 
-
-                h1 Welcome to the Message Board #{user.username}!
-                a(href='/users/member_join_form')
-                    button(type='button') Enter Code to Post Messages
-                a(href='/users/logout')
-                    button(type='button') Logout
+                div.user-header
+                    div.header-title-username
+                        h1(id="header-title") Welcome to the Message Board, 
+                        h1(id="username-header") #{user.username}!
+                    div.header-right-side
+                        div(class="user-buttons-container")
+                            a(href='/users/member_join_form')
+                                button(type='button' class="user-button" id="user-button-left") Member Code
+                            a(href='/users/logout')
+                                button(type='button' class="user-button" id="user-button-right") Logout
+                        p.code-instructions Enter Member Code to Post Messages
 
         else 
             div(class='no-user')
                 h1(id="header-title") Welcome to the Message Board!
-                div(class="no-user-buttons-container")
+                div(class="user-buttons-container")
                     a(href='/routers/message/sign-up') 
-                        button(type='button' class="no-user-button" id="no-user-button-left") Sign-Up
+                        button(type='button' class="user-button" id="user-button-left") Sign-Up
 
                     a(href='/users/login')
-                        button(type='button' class="no-user-button" id="no-user-button-right") Login 
-            each message in all_messages
-                div.message-card 
-                    div.card-header
-                        p #{message.title}
-                        if member || admin
-                            p #{message.user.username}
-                    div(class="card-body")
-                        p #{message.timestamp_formatted}
-                        p.message-text #{message.message_text}
+                        button(type='button' class="user-button" id="user-button-right") Login 
+        each message in all_messages
+            div.message-card 
+                div.card-header
+                    p #{message.title}
+                    if member || admin
+                        p #{message.user.username}
+                div(class="card-body")
+                    p #{message.timestamp_formatted}
+                    p.message-text #{message.message_text}

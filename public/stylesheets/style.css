@@ -18,6 +18,15 @@ a {
   background-color: aqua;
 }
 
+#header-title {
+  font-size: 2.5rem;
+}
+
+#username-header {
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
 .no-user {
   background-color: #00B7FF;
   display: flex;
@@ -27,24 +36,57 @@ a {
   font-weight: bold;
 }
 
-#header-title {
-  font-size: 3rem;
+.user-header {
+  background-color: #00ffcc;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  justify-content: space-around;
+  font-weight: bold;
 }
 
-.no-user-button {
+.member-header {
+  background-color: rgb(188, 84, 214);
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  justify-content: space-around;
+  font-weight: bold;
+}
+
+.admin-header {
+  background-color: rgb(245, 91, 143);
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  justify-content: space-around;
+  font-weight: bold;
+}
+
+.header-title-username {
+  display: flex;
+}
+
+.user-button {
   padding: .5rem;
   font-size: 1.5rem;
   font-weight: bold;
   background-color: white;
 }
 
-.no-user-button:hover {
+.user-button:hover {
   background-color: black;
   color: white;
 }
 
-#no-user-button-left {
+#user-button-left {
   margin-right: .5rem;
+}
+
+.code-instructions {
+  color: #3d3e3e;
+  font-weight: bold;
+  margin-bottom: 0rem;
 }
 
 .message-card {
