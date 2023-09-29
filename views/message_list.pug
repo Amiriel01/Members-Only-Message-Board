@@ -12,11 +12,8 @@ block content
                             a(href='/routers/message/   create_message')
                                 button(type='button' class="user-button" id="user-button-left") Create Message
 
-                            form(method="POST")
-                                input#messageId(type='hidden' name=messageId required='true' value=message._id)    
-                                button(type='submit' class="user-button" value=message._id)  Delete
 
-        else if (user && member)
+        else if (user && user.member)
             div.member-header
                 div.header-title-username
                     h1(id="header-title") Welcome to the Message Board, 
@@ -58,12 +55,16 @@ block content
             div.message-card 
                 div.card-header
                     p #{message.title}
-                    if member || admin
+                    if user && (user.member || user.admin)
                         p #{message.user.username}
                 div(class="card-body")
                     p #{message.timestamp_formatted}
                     div#message-text-delete
                         p.message-text #{message.message_text}
-                        if admin 
-                            a(href='/users/logout')
+                        if user && (user.admin) 
+                            form(method="POST" action='')
+                                input#messageId(type='hidden' name=messageId required='true' value=message._id)    
+                                button(type='submit' class="user-button" value=message._id)  Delete
+                            a(href='/users/delete')
                                     button(type='button' class="user-button" id="user-button-right") Delete
+
