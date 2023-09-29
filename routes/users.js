@@ -37,8 +37,8 @@ router.get("/member_join_form",  user_controller.member_join_form_get);
 
 router.post("/member_join_form",  user_controller.member_join_form_post);
 
-// router.get("/admin_join_form",  user_controller.admin_join_form_get);
+router.get("/admin_join_form",  user_controller.admin_join_form_get);
 
-// router.post("/admin_join_form",  user_controller.admin_join_form_post);
+router.post("/admin_join_form",  user_controller.admin_join_form_post);
 
 module.exports = router;

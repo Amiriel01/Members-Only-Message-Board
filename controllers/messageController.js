@@ -66,9 +66,7 @@ console.log(req.user)
     })
 ]
 
-exports.delete_message_post = (req, res, next) => {
-    Message.findByIdAndRemove(req.body.messageId, function deleteMessage(err) {
-        if (err) return next(err);
-        res.redirect("/");
-    })
+exports.delete_message_post = async (req, res, next) => {
+    await Message.findByIdAndRemove(req.body.messageId) 
+    res.redirect("/");
 }

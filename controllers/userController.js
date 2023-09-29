@@ -104,7 +104,7 @@ exports.member_join_form_post = [
         .isLength({ max: 10 })
         .escape(),
 
-    asyncHandler(async (res, req, next) => {
+    asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
@@ -120,13 +120,13 @@ exports.member_join_form_post = [
                 memberCodeError: "Wrong Member Code"
             })
         } else {
-            const user = new User(res.user);
+            // const user = new User(res.user);
+            let user = req.user
             user.member = true;
 
-            await User.findByIdAndUpdate(res.user._id, user, {}, (err) => {
-                if (err) return next(err);
-                return res.redirect("/")
-            });
+            await User.findByIdAndUpdate(req.user._id, user, {});
+
+            res.redirect('/')
         }
     })
 ]
@@ -145,29 +145,27 @@ exports.admin_join_form_post = [
         .trim()
         .escape(),
 
-    asyncHandler(async (res, req, next) => {
+    asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
 
             res.render("admin_join_form", {
-                user: res.user,
+                user: req.user,
                 errors: errors.array(),
             });
             return;
-        } else if (req.body.admin_code != process.env.ADMIN_CODE) {
+        } else if (req.body.admin_code != "Leaf") {
             res.render("admin_join_form", {
-                user: res.user,
+                user: req.user,
                 memberCodeError: "Wrong Admin Code"
             })
         } else {
-            const user = new User(res.local.currentUser);
+            let user = req.user
             user.admin = true;
 
-            await User.findByIdAndUpdate(res.user._id, user, {}, (err) => {
-                if (err) return next(err);
-                return res.redirect("/")
-            });
+            await User.findByIdAndUpdate(req.user._id, user, {});
+            return res.redirect("/")
         }
     })
 ]
