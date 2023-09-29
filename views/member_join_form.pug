@@ -2,25 +2,25 @@ extends layout
 
 block content 
 
-    //- h1 Welcome #{user.username}!
+    div.form-page
 
-    h2 Enter the code word to become a member and post messages.
+        h2.form-title Enter the Member Code Word
+        h2.form-title To Get Message Posting Permission
+            form(method='POST' action='')
+                div.form-group 
+                    label(for='member_code' id='form-label') Code Word: 
+                    input#form-input.form-control(type='text', placeholder='Enter Code Word' name='member_code' required='true') 
 
-        form(method='POST' action='')
-            div.form-group 
-                label(for='member_code') Code Word: 
-                input#member_code.form-control(type='text', placeholder='Enter Code Word' name='member_code' required='true') 
+                    if (memberCodeError)
+                        p #{memberCodeError}
 
-                if (memberCodeError)
-                    p #{memberCodeError}
+                    a(href='/')
+                        input.form-btn.btn-primary(type='submit' value="Submit")
 
-                a(href='/')
-                    input.btn.btn-primary(type='submit' value="Submit")
-
-            if (errors)
-                p #{errors}
+                if (errors)
+                    p #{errors}
             
            
 
-    a(href='/')
-            button(type='button') Return to Message Board
+        a(href='/')
+            button(type='button'   class='form-btn') Return to Message Board

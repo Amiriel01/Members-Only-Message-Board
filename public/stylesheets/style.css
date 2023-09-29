@@ -9,15 +9,6 @@ a {
   color: #00B7FF;
 }
 
-/* #username {
-  background-color: blue;
-} */
-
-
-.btn {
-  background-color: aqua;
-}
-
 #header-title {
   font-size: 2.5rem;
 }
@@ -116,3 +107,46 @@ a {
   display: flex;
   justify-content: space-between;
 }
+
+.form-page {
+  text-align: center;
+  color: #006aff;
+  font-weight: bold;
+  margin-top: 10%;
+}
+
+.form-title {
+  font-size: 3rem;
+}
+
+.form-btn {
+  color: #006aff;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+#form-input,
+#form-label {
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+.sign-up-form-group { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+#sign-up-label {
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+}
+
+#sign-up-input {
+  font-size: 1.25rem;
+  margin-bottom: .5rem;
+  text-align: center;
+}
+

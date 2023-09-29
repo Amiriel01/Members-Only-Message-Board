@@ -2,25 +2,27 @@ extends layout
 
 block content 
 
-    h1 Welcome #{user.username}!
+    div.form-page
 
-    h2 Enter the code word to become a member and post messages.
+        h1.form-title Enter the Admin Code Word
 
-        form(method='POST' action='')
-            div.form-group 
-                label(for='admin_code') Code Word: 
-                input#admin_code.form-control(type='text', placeholder='Enter Code Word' name='admin_code' required='true') 
+        h2.form-title To Get Admin Permissions
 
-                if (adminCodeError)
-                    p #{adminCodeError}
+            form(method='POST' action='')
+                div.form-group 
+                    label(for='admin_code' id='form-label') Code Word: 
+                    input#form-input.form-control(type='text', placeholder='Enter Code Word' name='admin_code' required='true') 
 
-                a(href='/')
-                    input.btn.btn-primary(type='submit' value="Submit")
+                    if (adminCodeError)
+                        p #{adminCodeError}
 
-            if (errors)
-                p #{errors}
+                    a(href='/')
+                        input.form-btn.btn-primary(type='submit' value="Submit")
+
+                if (errors)
+                    p #{errors}
             
            
 
-    a(href='/')
-            button(type='button') Return to Message Board
+        a(href='/')
+                button(type='button' class='form-button') Return to Message Board

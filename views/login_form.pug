@@ -2,16 +2,16 @@ extends layout
 
 block content 
 
+    div.form-page
+        h1.form-title Please Log In 
 
-    h1 Please Log In 
+        form(method='POST' action='')
+            label(for='username' id='form-label') Username: 
+                input#form-input.form-control(type='text', placeholder='Enter Username' name='username')
 
-    form(method='POST' action='')
-        label(for='username') Username: 
-            input#username.form-control(type='text', placeholder='Enter Username' name='username')
-
-        label(for='password') Password: 
-            input#password.form-control(type='text', placeholder='Enter Password' name='password')
+            label(for='password' id='form-label') Password: 
+                input#form-input.form-control(type='text', placeholder='Enter Password' name='password')
     
-        button.btn.btn-primary(type='submit') Log In
+            button.form-btn.btn-primary(type='submit') Log In
 
         

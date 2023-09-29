@@ -1,31 +1,31 @@
 extends layout 
 
 block content 
+    div.form-page
+        h1.form-title=title 
 
-    h1=title 
+        form(method='POST' action='')
+            div.sign-up-form-group 
+                label(for='first_name' id='sign-up-label') First Name: 
+                input#sign-up-input.form-control(type='text', placeholder='Enter First Name' name='first_name' required='true' value=(undefined===user ? '' : user.first_name))
 
-    form(method='POST' action='')
-        div.form-group 
-            label(for='first_name') First Name: 
-            input#first_name.form-control(type='text', placeholder='Enter First Name' name='first_name' required='true' value=(undefined===user ? '' : user.first_name))
+            div.sign-up-form-group 
+                label(for='last_name' id='sign-up-label') Last Name: 
+                input#sign-up-input.form-control(type='text', placeholder='Enter Last Name' name='last_name' required='true' value=(undefined===user ? '' : user.last_name))
 
-        div.form-group 
-            label(for='last_name') Last Name: 
-            input#last_name.form-control(type='text', placeholder='Enter Last Name' name='last_name' required='true' value=(undefined===user ? '' : user.last_name))
+            div.sign-up-form-group 
+                label(for='username' id='sign-up-label') Username: 
+                input#sign-up-input.form-control(type='text', placeholder='Enter Username' name='username' required='true' value=(undefined===user ? '' : user.username))
 
-        div.form-group 
-            label(for='username') Username: 
-            input#username.form-control(type='text', placeholder='Enter Username' name='username' required='true' value=(undefined===user ? '' : user.username))
+            div.sign-up-form-group 
+                label(for='password' id='sign-up-label') Password: 
+                input#sign-up-input.form-control(type='password', placeholder='Enter Password' name='password' required='true' value=(undefined===user ? '' : user.password))
 
-        div.form-group 
-            label(for='password') Password: 
-            input#password.form-control(type='password', placeholder='Enter Password' name='password' required='true' value=(undefined===user ? '' : user.password))
+            div.sign-up-form-group 
+                label(for='confirm_password' id='sign-up-label') Confirm Password: 
+                input#sign-up-input.form-control(type='password', placeholder='Confirm Password' name='confirm_password' required='true' value=(undefined===user ? '' : user.confirm_password))
 
-        div.form-group 
-            label(for='confirm_password') Confirm Password: 
-            input#confirm_password.form-control(type='password', placeholder='Confirm Password' name='confirm_password' required='true' value=(undefined===user ? '' : user.confirm_password))
-
-        input.btn.btn-primary(type='submit' value="Sign Up") 
+            input.form-btn.btn-primary(type='submit' value="Sign Up") 
 
         
         
