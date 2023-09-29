@@ -65,3 +65,10 @@ console.log(req.user)
         }
     })
 ]
+
+exports.delete_message_post = (req, res, next) => {
+    Message.findByIdAndRemove(req.body.messageId, function deleteMessage(err) {
+        if (err) return next(err);
+        res.redirect("/");
+    })
+}

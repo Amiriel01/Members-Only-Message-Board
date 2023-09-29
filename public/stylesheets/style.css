@@ -84,7 +84,7 @@ a {
 }
 
 .code-instructions {
-  color: #3d3e3e;
+  color: black;
   font-weight: bold;
   margin-bottom: 0rem;
 }
@@ -110,4 +110,9 @@ a {
 
 .message-text {
   font-size: 1.25rem;
+}
+
+#message-text-delete {
+  display: flex;
+  justify-content: space-between;
 }
