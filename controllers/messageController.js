@@ -39,14 +39,13 @@ exports.create_message_post = [
     asyncHandler(async (req, res, next) => {
         //extract validation errors from the request//
         const errors = validationResult(req);
-console.log(req.user)
+        console.log(req.user)
         //create sign up form object with escaped and trimmed info//
         const message = new Message({
             title: req.body.title,
             message_text: req.body.message_text,
             user: req.user
         });
-
 
         //When there are no errors, render form again with sanitized values and error messages//
         if (!errors.isEmpty()) {
@@ -67,8 +66,11 @@ console.log(req.user)
 ]
 
 exports.delete_message_post = async (req, res, next) => {
-    const messageId = await Message.findById(req.params.id);
+   
+    const messageId = await Message.findById(req.params.id).exec();
 
-    await Message.findByIdAndRemove(req.body.messageId); 
+    console.log(req.body)
+
+    Message.findByIdAndRemove(messageId);
     res.redirect("/");
 }

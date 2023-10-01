@@ -8,16 +8,9 @@ const bcrypt = require('bcryptjs');
 const user_controller = require("../controllers/userController");
 const message_controller = require("../controllers/messageController");
 
-// //message home route
-// router.get("/message", message_controller.message_list)
-
-// //message home route
-// router.get("/message", (req, res) => {
-//     message_controller.message_list
-//     // res.render("message_list", { user: req.user });
-// })
-
 router.get("/message", message_controller.message_list);
+
+router.post("/message", message_controller.delete_message_post);
 
 //sign up form routes
 
