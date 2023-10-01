@@ -2,16 +2,18 @@ extends layout
 
 block content 
 
-    h1 Create New Message
+    div.form-page
 
-    form(method='POST' action='')
-        div.form-group 
-            label(for='title') Message Title: 
-            input#title.form-control(type='text', placeholder='Enter Message Title' name='title' required='true')
+        h1.form-title Create New Message
 
-        div.form-group 
-            label(for='message_text') Message Text: 
-            input#message_text.form-control(type='text', placeholder='Enter Message Text' name='message_text' required='true')
+            form(method='POST' action='')
+                div.form-group 
+                    label(for='title' id='form-label') Message Title: 
+                    input#form-input.form-control(type='text', placeholder='Enter Message Title' name='title' required='true')
 
-        a(href='/') 
-            input.btn.btn-primary(type='submit' value="Submit Message") 
+                div.form-group 
+                    label(for='message_text' id='form-label') Message Text: 
+                    input#form-input.form-control(type='text', placeholder='Enter Message Text' name='message_text' required='true')
+
+                a(href='/') 
+                    input.form-btn.btn-primary(type='submit' value="Submit Message") 

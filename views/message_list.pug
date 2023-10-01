@@ -65,6 +65,6 @@ block content
                         p.message-text #{message.message_text}
                         if user && (user.admin) 
                             form(method="POST" action='')
-                                input#messageId.form-control(type='hidden' name=messageId required='true' value=message._id)    
+                                input#messageId.form-control(type='hidden' name="messageId" required='true' value=message._id)    
                                 button(type='submit' class="user-button")  Delete
 
