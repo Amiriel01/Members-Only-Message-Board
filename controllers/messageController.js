@@ -66,11 +66,10 @@ exports.create_message_post = [
 ]
 
 exports.delete_message_post = async (req, res, next) => {
-   
-    const messageId = await Message.findById(req.params.id).exec();
+    const messageId = await Message.findById(req.body.id).exec();
 
-    console.log(req.body)
+    console.log(messageId)
 
-    Message.findByIdAndRemove(messageId);
+    await Message.findByIdAndRemove(req.body.messageId); 
     res.redirect("/");
 }
