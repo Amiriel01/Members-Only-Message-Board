@@ -11,6 +11,8 @@ block content
                         div(class="user-buttons-container")
                             a(href='/routers/message/   create_message')
                                 button(type='button' class="user-button" id="user-button-left") Create Message
+                            a(href='/users/logout')
+                                button(type='button' class="user-button" id="user-button-right") Logout
 
 
         else if (user && user.member)
@@ -63,8 +65,6 @@ block content
                         p.message-text #{message.message_text}
                         if user && (user.admin) 
                             form(method="POST" action='')
-                                input#messageId(type='hidden' name=messageId required='true' value=message._id)    
-                                button(type='submit' class="user-button" value=message._id)  Delete
-                            a(href='/users/delete')
-                                    button(type='button' class="user-button" id="user-button-right") Delete
+                                input#messageId.form-control(type='hidden' name=messageId required='true' value=message._id)    
+                                button(type='submit' class="user-button")  Delete
 

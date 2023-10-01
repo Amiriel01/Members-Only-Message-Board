@@ -67,6 +67,8 @@ console.log(req.user)
 ]
 
 exports.delete_message_post = async (req, res, next) => {
-    await Message.findByIdAndRemove(req.body.messageId) 
+    const messageId = await Message.findById(req.params.id);
+
+    await Message.findByIdAndRemove(req.body.messageId); 
     res.redirect("/");
 }
