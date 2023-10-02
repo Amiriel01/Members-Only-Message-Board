@@ -7,12 +7,15 @@ When users first log into the site they are on the non-user message board view. 
 Homepage Non-User View:
 ![](public/images/nonuser.png)
 
-After clicking the Login button users are routed to the Sign-Up Form. The Sign-Up Form requires the user to enter their first and last names. It also requires a unique username a password, the password must match the confirm password. Before the account can be created all information must be present.
+After clicking the Sign Up button users are routed to the Sign-Up Form. The Sign-Up Form requires the user to enter their first and last names, a unique username, a password, the password must match the confirm password. Before the account can be created all information must be present.
 
 Sign-Up Form Screen:
 ![](public/images/signup.png)
 
 Once the account is created users are routed back to the message board screen. Users can click the login button and login after creating their account. Once logged in the user will see the same message board as the non-user until they become a member by entering the code word. The only difference is the user's name is now populated at the top.
+
+Message Board User View:
+![](public/images/user.png)
 
 Login Form Screen:
 ![](public/images/login.png)
@@ -22,13 +25,13 @@ The user can become a member by entering the member code on this screen.
 Member Code Screen:
 ![](public/images/usercode.png)
 
-Message Board User View:
-![](public/images/user.png)
-
-Once the user is logged in they will see the message board screen with a few differences. The user will see the poster's name in the top right corner of each message. They will also see the Create Message and Admin Code buttons. 
+Once the member permissions are granted the member will see the message board screen with a few differences. The user will see the poster's name in the top right corner of each message. They will also see the Create Message and Admin Code buttons. 
 
 Message Board Member Screen:
 ![](public/images/member.png)
+
+Create Message Form: (Accessed by clicking the create message button)
+![](public/images/createmessage.png)
 
 The member can become an admin by using the admin code on the admin screen. 
 
@@ -39,5 +42,5 @@ Once the member upgrades to being an admin they will be able to delete posts tha
 
 ![](public/images/admin.png)
 
-Each message board page has a logout button other than the first load in non-user view.
+Each message board page has a logout button, other than the non-user view.
 
